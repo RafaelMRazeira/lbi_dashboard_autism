@@ -9,10 +9,20 @@ CONFIG = dotenv_values(".env")
 
 LOCALIZACAO = {
     "Norte": ["Acre", "Amapá", "Amazonas", "Pará", "Rondônia", "Roraima", "Tocantins"],
-    "Nordeste": ["Alagoas", "Bahia", "Ceará", "Maranhão", "Paraíba", "Pernambuco", "Piauí", "Rio Grande do Norte", "Sergipe"],
+    "Nordeste": [
+        "Alagoas",
+        "Bahia",
+        "Ceará",
+        "Maranhão",
+        "Paraíba",
+        "Pernambuco",
+        "Piauí",
+        "Rio Grande do Norte",
+        "Sergipe",
+    ],
     "Centro-Oeste": ["Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"],
     "Sudeste": ["Espírito Santo", "Minas Gerais", "Rio de Janeiro", "São Paulo"],
-    "Sul": ["Paraná", "Rio Grande do Sul", "Santa Catarina"]
+    "Sul": ["Paraná", "Rio Grande do Sul", "Santa Catarina"],
 }
 
 ESTADOS = [
@@ -42,46 +52,49 @@ ESTADOS = [
     "Santa Catarina",
     "São Paulo",
     "Sergipe",
-    "Tocantins"
+    "Tocantins",
 ]
 
 UF_TO_REGION = {
-    'AC': 'Norte',
-    'AL': 'Nordeste',
-    'AP': 'Norte',
-    'AM': 'Norte',
-    'BA': 'Nordeste',
-    'CE': 'Nordeste',
-    'DF': 'Centro-Oeste',
-    'ES': 'Sudeste',
-    'GO': 'Centro-Oeste',
-    'MA': 'Nordeste',
-    'MT': 'Centro-Oeste',
-    'MS': 'Centro-Oeste',
-    'MG': 'Sudeste',
-    'PA': 'Norte',
-    'PB': 'Nordeste',
-    'PR': 'Sul',
-    'PE': 'Nordeste',
-    'PI': 'Nordeste',
-    'RJ': 'Sudeste',
-    'RN': 'Nordeste',
-    'RS': 'Sul',
-    'RO': 'Norte',
-    'RR': 'Norte',
-    'SC': 'Sul',
-    'SP': 'Sudeste',
-    'SE': 'Nordeste',
-    'TO': 'Norte'
+    "AC": "Norte",
+    "AL": "Nordeste",
+    "AP": "Norte",
+    "AM": "Norte",
+    "BA": "Nordeste",
+    "CE": "Nordeste",
+    "DF": "Centro-Oeste",
+    "ES": "Sudeste",
+    "GO": "Centro-Oeste",
+    "MA": "Nordeste",
+    "MT": "Centro-Oeste",
+    "MS": "Centro-Oeste",
+    "MG": "Sudeste",
+    "PA": "Norte",
+    "PB": "Nordeste",
+    "PR": "Sul",
+    "PE": "Nordeste",
+    "PI": "Nordeste",
+    "RJ": "Sudeste",
+    "RN": "Nordeste",
+    "RS": "Sul",
+    "RO": "Norte",
+    "RR": "Norte",
+    "SC": "Sul",
+    "SP": "Sudeste",
+    "SE": "Nordeste",
+    "TO": "Norte",
 }
 
-with urlopen("https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson") as response: Brazil = json.load(response)
+with urlopen(
+    "https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/brazil-states.geojson"
+) as response:
+    Brazil = json.load(response)
 
-state_id_map = {}      
+state_id_map = {}
 
-for feature in Brazil['features']: 
-    feature['id'] = unidecode(feature['properties']['name'])
-    state_id_map[feature['properties']['sigla']] = feature['id']
+for feature in Brazil["features"]:
+    feature["id"] = unidecode(feature["properties"]["name"])
+    state_id_map[feature["properties"]["sigla"]] = feature["id"]
 
 BRAZIL_GEOJSON = Brazil.copy()
 

@@ -7,6 +7,7 @@ def get_requirements_list(file):
         requirements = [line.replace("\n", "") for line in f.readlines()]
     return requirements
 
+
 requirements = get_requirements_list("requirements.txt")
 
 setup(
