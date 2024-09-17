@@ -101,3 +101,28 @@ BRAZIL_GEOJSON = Brazil.copy()
 TIMEOUT = 900
 
 USERNAME = pwd.getpwuid(os.getuid())[0]
+
+
+def _lower_case_city_geojson(sp_geojson):
+    for city_sp_geojson in sp_geojson["features"]:
+        city_sp_geojson["properties"]["name"] = city_sp_geojson["properties"][
+            "name"
+        ].lower()
+    return sp_geojson
+
+
+def load_cities_sp_geojson():
+    f = open("assets/data/all_cities_sao_paulo_geo_location.json", "r")
+    cities_sp_geojson = json.load(f)
+    cities_sp_geojson = _lower_case_city_geojson(cities_sp_geojson)
+    all_cities = [
+        city["properties"]["name"].lower() for city in cities_sp_geojson["features"]
+    ]
+    return cities_sp_geojson, all_cities
+
+
+CITIES_SP_GEOJSON, ALL_CITIES_SP = load_cities_sp_geojson()
+
+EXTERNAL_STYLESHEETS = [
+    "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap",
+]

@@ -17,8 +17,8 @@ TAB_DEMANDAS_PAGE = html.Div(
                                 html.Label(
                                     "FILTRAR POR ESTADO",
                                     style={
-                                        "margin-bottom": "5px",
-                                        "font-size": "12px",
+                                        "marginBottom": "5px",
+                                        "fontSize": "12px",
                                     },
                                 ),
                                 dcc.Dropdown(
@@ -30,9 +30,9 @@ TAB_DEMANDAS_PAGE = html.Div(
                             ],
                             style={
                                 "display": "flex",
-                                "flex-direction": "column",
+                                "flexDirection": "column",
                                 "width": "100%",
-                                "margin-right": "20px",
+                                "marginRight": "20px",
                             },
                         ),
                         html.Div(
@@ -40,8 +40,8 @@ TAB_DEMANDAS_PAGE = html.Div(
                                 html.Label(
                                     "FILTRAR POR REGIÃO",
                                     style={
-                                        "margin-bottom": "5px",
-                                        "font-size": "12px",
+                                        "marginBottom": "5px",
+                                        "fontSize": "12px",
                                     },
                                 ),
                                 dcc.Dropdown(
@@ -53,14 +53,14 @@ TAB_DEMANDAS_PAGE = html.Div(
                             ],
                             style={
                                 "display": "flex",
-                                "flex-direction": "column",
+                                "flexDirection": "column",
                                 "width": "100%",
                             },
                         ),
                     ],
                     style={
                         "display": "flex",
-                        "flex-direction": "row",
+                        "flexDirection": "row",
                     },
                 ),
                 # MÉDIA
@@ -71,9 +71,9 @@ TAB_DEMANDAS_PAGE = html.Div(
                             style={
                                 "textAlign": "center",
                                 "color": "#252423",
-                                "margin-bottom": "5px",
-                                "font-weight": "normal",
-                                "font-size": "12px",
+                                "marginBottom": "5px",
+                                "fontWeight": "normal",
+                                "fontSize": "12px",
                             },
                         ),
                         html.Div(
@@ -81,8 +81,8 @@ TAB_DEMANDAS_PAGE = html.Div(
                             style={
                                 "textAlign": "center",
                                 "color": "#252423",
-                                "font-weight": "bold",
-                                "font-size": "32px",
+                                "fontWeight": "bold",
+                                "fontSize": "32px",
                             },
                             id="process_mil",
                         ),
@@ -93,9 +93,9 @@ TAB_DEMANDAS_PAGE = html.Div(
                 html.Div([html.Div(dcc.Graph(id="choropleth-map-demand"))], style={}),
             ],
             style={
-                "background-color": "#fff",
-                "border-radius": "15px",
-                "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                "backgroundColor": "#fff",
+                "borderRadius": "15px",
+                "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                 "padding": "10px",
             },
         ),
@@ -104,18 +104,18 @@ TAB_DEMANDAS_PAGE = html.Div(
                 html.Div(
                     dcc.Graph(id="histogram-demand"),
                     style={
-                        "background-color": "#fff",
-                        "border-radius": "15px",
-                        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                        "backgroundColor": "#fff",
+                        "borderRadius": "15px",
+                        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                         "padding": "10px",
                     },
                 ),
                 html.Div(
                     dcc.Graph(id="bar-demand"),
                     style={
-                        "background-color": "#fff",
-                        "border-radius": "15px",
-                        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                        "backgroundColor": "#fff",
+                        "borderRadius": "15px",
+                        "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                         "padding": "10px",
                     },
                 ),
@@ -133,7 +133,7 @@ TAB_DEMANDAS_PAGE = html.Div(
         "grid-template-columns": "1fr 1fr",
         "gap": "10px",
         "padding": "10px",
-        "font-family": "Open Sans, sans-serif",
+        "fontFamily": "Open Sans, sans-serif",
     },
 )
 
