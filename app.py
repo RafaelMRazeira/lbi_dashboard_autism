@@ -57,11 +57,11 @@ dashAPI = DashAPI()
 
 
 @dashAPI.app.callback(Output("tabs-content", "children"), Input("tabs-LBI", "value"))
-@dashAPI.cache.memoize(timeout=TIMEOUT)
+# @dashAPI.cache.memoize(timeout=TIMEOUT)
 def render_content(tab):
 
     TABS = {
-        "tab-inicial": TAB_INICIAL_PAGE,
+        "tab-inicial": TAB_VISAO_GERAL_PAGE,
         "tab-visao_geral": TAB_VISAO_GERAL_PAGE,
         "tab-duracao": TAB_INICIAL_PAGE,
         "tab-demandas": TAB_INICIAL_PAGE,
@@ -92,9 +92,10 @@ def _update_map_visao_geral(value_city):
     Output("amount_most_judge", "children"),
     Output("most_clerk", "children"),
     Output("amount_most_clerk", "children"),
+    Output("total_time", "children"),
     Input("filter-city", "value"),
 )
-@dashAPI.cache.memoize(timeout=TIMEOUT)
+# @dashAPI.cache.memoize(timeout=TIMEOUT)
 def _update_cards_visao_geral(value_city):
     return update_cards_visao_geral(value_city)
 

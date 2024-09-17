@@ -76,8 +76,8 @@ TAB_INICIAL_PAGE = (
         ],
         style={
             "display": "grid",
-            "grid-template-columns": "1fr",
-            "grid-template-rows": "1fr 1fr 1fr",
+            "gridTemplateColumns": "1fr",
+            "gridTemplateRows": "1fr 1fr 1fr",
             "gap": "5px",
             "backgroundColor": "#fff",
             "borderRadius": "15px",

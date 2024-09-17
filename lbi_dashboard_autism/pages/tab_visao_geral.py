@@ -39,7 +39,7 @@ FILTER_LAWSUITS_AMOUNT_BY_CITY = html.Div(
 )
 
 
-def _card(title, most_id, amount_id):
+def _lateral_card(title, most_id, amount_id, subtitle="dos processos",):
     return html.Div(
         [
             html.H6(
@@ -75,7 +75,7 @@ def _card(title, most_id, amount_id):
                 id=amount_id,
             ),
             html.P(
-                "dos processos",
+                subtitle,
                 style={
                     "textAlign": "center",
                     "color": "#252423",
@@ -90,6 +90,7 @@ def _card(title, most_id, amount_id):
             "backgroundColor": "#fff",
             "borderRadius": "15px",
             "boxShadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+            "margin": "0.25rem .25em",
         },
     )
 
@@ -124,7 +125,6 @@ TAB_VISAO_GERAL_PAGE = html.Div(
                     ],
                     style={},
                 ),
-                # MAPA
                 html.Div([html.Div(dcc.Graph(id="choropleth-map-amount"))], style={}),
             ],
             style={
@@ -136,34 +136,63 @@ TAB_VISAO_GERAL_PAGE = html.Div(
         ),
         html.Div(
             [
-                _card(
-                    "Assunto do Direito mais presente",
-                    "most_subject",
-                    "amount_most_subject",
+                html.Div(
+                    _lateral_card(
+                        "Tempo médio de duração dos processos",
+                        "total_time",
+                        "total_time",
+                        subtitle="dias",
+                    ),
+                    style={},
                 ),
-                _card(
-                    "Classe do Direito mais presente", "most_class", "amount_most_class"
+                html.Div(
+                    [
+                        _lateral_card(
+                            "Assunto do Direito mais presente",
+                            "most_subject",
+                            "amount_most_subject",
+                        ),
+                        _lateral_card(
+                            "Classe do Direito mais presente",
+                            "most_class",
+                            "amount_most_class",
+                        ),
+                        _lateral_card(
+                            "Tipo do Direito mais presente",
+                            "most_type",
+                            "amount_most_type",
+                        ),
+                        _lateral_card(
+                            "Vara do Direito mais presente",
+                            "most_court",
+                            "amount_most_court",
+                        ),
+                        _lateral_card(
+                            "Juíz(a) mais presente", "most_judge", "amount_most_judge"
+                        ),
+                        _lateral_card(
+                            "Escrivã(o) mais presente",
+                            "most_clerk",
+                            "amount_most_clerk",
+                        ),
+                    ],
+                    style={
+                        "display": "grid",
+                        "gridTemplateColumns": "1fr 1fr",
+                        "gridTemplateRows": "1fr 1fr 1fr",
+                        "flexWrap": "wrap",
+                    },
                 ),
-                _card("Tipo do Direito mais presente", "most_type", "amount_most_type"),
-                _card(
-                    "Vara do Direito mais presente", "most_court", "amount_most_court"
-                ),
-                _card("Juíz(a) mais presente", "most_judge", "amount_most_judge"),
-                _card("Escrivã(o) mais presente", "most_clerk", "amount_most_clerk"),
             ],
-            style={
-                "display": "grid",
-                "gridTemplateColumns": "1fr 1fr",
-                "gridTemplateRows": "1fr 1fr 1fr",
-                "gap": "10px",
-            },
+            style={},
         ),
     ],
     style={
         "display": "grid",
+        "justifyContent": "space-between",
         "gridTemplateColumns": "1fr 1fr",
-        "gap": "10px",
-        "padding": "10px",
+        "gap": "0.25em",
+        "padding": "0.25em",
         "fontFamily": "Open Sans, sans-serif",
     },
 )
@@ -214,11 +243,19 @@ def _select_most_and_amount_attribute(df, attribute):
     return most_att, most_att_amount
 
 
+def _count_time(df):
+    times = sum([sub.replace("]", "").replace("[", "").replace("'", "").split(", ") for sub in df["Tempo Total em dias"]], [],)
+    times = [int(t) for t in times]
+    
+    total_time = round(np.mean(times), 1)
+
+    return total_time
+
 def update_cards_visao_geral(value_city):
     df_plot = _filter_df(value_city)
 
     if len(df_plot["Assunto"]) == 0:
-        return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        return 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
     lawsuits_amount = df_plot["Quantidade de Processos"].sum()
 
@@ -234,6 +271,7 @@ def update_cards_visao_geral(value_city):
     most_clerk, most_clerk_amount = _select_most_and_amount_attribute(
         df_plot, "Escrivão"
     )
+    total_time = _count_time(df_plot)
 
     return (
         lawsuits_amount,
@@ -249,4 +287,5 @@ def update_cards_visao_geral(value_city):
         most_judge_amount,
         most_clerk,
         most_clerk_amount,
+        total_time
     )
