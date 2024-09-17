@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 from dash import html, dcc
 import plotly.express as px
 from lbi_dashboard_autism.data import DF_PLOT
@@ -39,7 +38,12 @@ FILTER_LAWSUITS_AMOUNT_BY_CITY = html.Div(
 )
 
 
-def _lateral_card(title, most_id, amount_id, subtitle="dos processos",):
+def _lateral_card(
+    title,
+    most_id,
+    amount_id,
+    subtitle="dos processos",
+):
     return html.Div(
         [
             html.H6(
@@ -244,12 +248,19 @@ def _select_most_and_amount_attribute(df, attribute):
 
 
 def _count_time(df):
-    times = sum([sub.replace("]", "").replace("[", "").replace("'", "").split(", ") for sub in df["Tempo Total em dias"]], [],)
+    times = sum(
+        [
+            sub.replace("]", "").replace("[", "").replace("'", "").split(", ")
+            for sub in df["Tempo Total em dias"]
+        ],
+        [],
+    )
     times = [int(t) for t in times]
-    
+
     total_time = round(np.mean(times), 1)
 
     return total_time
+
 
 def update_cards_visao_geral(value_city):
     df_plot = _filter_df(value_city)
@@ -287,5 +298,5 @@ def update_cards_visao_geral(value_city):
         most_judge_amount,
         most_clerk,
         most_clerk_amount,
-        total_time
+        total_time,
     )
